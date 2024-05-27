@@ -1,4 +1,3 @@
-plotly.express
-datetime
-pandas
+re
 streamlit
+docx
