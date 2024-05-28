@@ -1,35 +1,32 @@
 import streamlit as st
 from docx import Document
-from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.oxml.ns import qn
+from docx.shared import Pt, Cm
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from io import BytesIO
 
 def formatar_docx(file, espacamento, fonte):
     # Carrega o documento
     doc = Document(file)
 
-    # Define as margens (em polegadas)
-    sections = doc.sections
-    for section in sections:
-        section.left_margin = Pt(3 * 28.35)  # 3 cm em pontos
-        section.right_margin = Pt(2 * 28.35)  # 2 cm em pontos
-        section.top_margin = Pt(3 * 28.35)  # 3 cm em pontos
-        section.bottom_margin = Pt(2 * 28.35)  # 2 cm em pontos
+    # Define as margens (em centímetros)
+    for section in doc.sections:
+        section.left_margin = Cm(3)  # 3 cm
+        section.right_margin = Cm(2)  # 2 cm
+        section.top_margin = Cm(3)  # 3 cm
+        section.bottom_margin = Cm(2)  # 2 cm
 
     # Define a fonte e o espaçamento para cada parágrafo
     for para in doc.paragraphs:
         para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY  # Texto justificado
         for run in para.runs:
             run.font.name = fonte
-            run._element.rPr.rFonts.set(qn('w:eastAsia'), fonte)  # Define a fonte para caracteres asiáticos também
             run.font.size = Pt(12)  # Tamanho da fonte
 
         # Define o espaçamento entre linhas
         if espacamento == "1,0":
-            para.paragraph_format.line_spacing = Pt(12)  # Espaçamento de 1,0 linha
+            para.paragraph_format.line_spacing_rule = None  # Espaçamento simples
         else:
-            para.paragraph_format.line_spacing = Pt(18)  # Espaçamento de 1,5 linha
+            para.paragraph_format.line_spacing_rule = WD_LINE_SPACING.ONE_POINT_FIVE  # Espaçamento de 1,5 linha
 
     # Salva o documento em um buffer
     buffer = BytesIO()
