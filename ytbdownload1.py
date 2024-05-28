@@ -1,7 +1,7 @@
 import streamlit as st
 from pytube import YouTube
 import os
-from moviepy.editor import VideoFileClip, AudioFileClip
+from moviepy import VideoFileClip, AudioFileClip
 
 # Função para baixar o vídeo do YouTube em alta resolução
 def download_video(url, resolution):
