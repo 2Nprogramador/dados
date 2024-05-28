@@ -1,3 +1,4 @@
 streamlit
 io
 BytesIO
+moviepy.editor
