@@ -1,0 +1,9 @@
+streamlit
+docx
+Document
+docx.shared
+docx.enum.text
+WD_ALIGN_PARAGRAPH
+WD_LINE_SPACING
+io
+BytesIO
