@@ -2,3 +2,4 @@ streamlit
 io
 BytesIO
 moviepy.editor
+pytube
